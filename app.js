@@ -105,6 +105,8 @@ $(getData);*/
 
 const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3/movie/popular';
 const THE_MOVIE_DATABASE_KEY = 'f852305411e85c5520c80f92853fd711';
+const THE_MOVIE_DATABASE_IMAGE_BASEURL = 'https://image.tmdb.org/t/p';
+const THE_MOVIE_DATABASE_IMAGE_SIZE = '/w500';
 
 const params = {
 	api_key: THE_MOVIE_DATABASE_KEY,
@@ -118,9 +120,12 @@ console.log(data);
 function displayMovies (response) {
   let output = '';
   response.results.forEach(function(movie) {
-    output += movie.title + '\n';
+  	//let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie[poster_path]}`;
+  	//console.log(movie[poster_path]);
+  	//let movieRating = movie[vote_average];
+    output += `<li>${movie.title}<br></li>`; // put em in strings
   });
-  $('.movie-results').html(output);
+  $('.movie-list').html(output);
 }
 
 //download allow-control-allow-origin: * extension for chrome
