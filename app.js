@@ -103,46 +103,61 @@ $(getData);*/
   }
 }*/
 
-const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3/movie/popular';
+//const GOOGLE_DISTANCE_MATRIX_ENDPOINT = 'https://maps.googleapis.com/maps/api/js?';
+//const GOOGLE_DISTANCE_MATRIX_API_KEY = 'AIzaSyCVOn7x1xNbdv1XJgTqsoBORyZ7q1HZkaM';
+
+let origin = 'San Francisco, California, USA';
+let destination = 'Los Angeles, California, USA';
+
+let service = new google.maps.DistanceMatrixService();
+service.getDistanceMatrix({
+  origins: [origin],
+  destinations: [destination],
+  language: 'en',
+  units: 'imperial'
+}, displayTripLength);
+
+function displayTripLength (response, status) {
+  console.log(response);
+}
+
+const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3/movie/popular'; // for popular movies
 const THE_MOVIE_DATABASE_KEY = 'f852305411e85c5520c80f92853fd711';
 const THE_MOVIE_DATABASE_IMAGE_BASEURL = 'https://image.tmdb.org/t/p';
 const THE_MOVIE_DATABASE_IMAGE_SIZE = '/w500';
+const popularMovies = [];
 
-const params = {
-	api_key: THE_MOVIE_DATABASE_KEY,
-	language: 'en-US',
-	page: 1
-};
+function retrieveMovies () {
+  const params = {
+    api_key: THE_MOVIE_DATABASE_KEY,
+    language: 'en-US',
+    page: 1
+  };
 
-let data = $.getJSON(THE_MOVIE_DATABASE_ENDPOINT, params, displayMovies);
-console.log(data);
+  let data = $.getJSON(THE_MOVIE_DATABASE_ENDPOINT, params, displayMovies);
+  console.log(data);
+}
 
 function displayMovies (response) {
-  let output = '';
-  response.results.forEach(function(movie) {
-  	//let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie[poster_path]}`;
-  	//console.log(movie[poster_path]);
-  	//let movieRating = movie[vote_average];
-    output += `<li>${movie.title}<br></li>`; // put em in strings
-  });
-  $('.movie-list').html(output);
+  let movies = response.results;
+  popularMovies.push(movies);
+  let start = 0;
+  let end = 5;
+  let fiveMoviesToDisplay = movies.slice(start, end);
+  const addMovieButton = `<button class="add-movie">Add to List</button>`;
+
+
+  function displayFiveMovies () {
+    let output = '';
+    fiveMoviesToDisplay.forEach(function(movie) {
+    	let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie["poster_path"]}`;
+    	let movieRating = movie["vote_average"];
+      output += `<li><img src=${moviePoster}><br>${movie.title}<br>${movieRating}<br>${addMovieButton}</li>`;
+    });
+    $('.movie-list').html(output);
+  }
+  displayFiveMovies();
 }
 
-//download allow-control-allow-origin: * extension for chrome
-
-/*  "async": true,
-  "crossDomain": true,
-  "url": "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=f852305411e85c5520c80f92853fd711",
-  "method": "GET",
-  "headers": {},
-  "data": "{}"
-}
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});*/
-
-// https://www.html5rocks.com/en/tutorials/cors/
-
-
+$('.load-movies').on('click', retrieveMovies);
 
