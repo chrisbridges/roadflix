@@ -21,7 +21,7 @@
 $(getData);*/
 
 // THIS ONE ANY BETTER? - https://developers.google.com/maps/documentation/javascript/get-api-key
-function initMap () {
+/*function initMap () {
 	 let map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: 39.5, lng: -98.35},
 	  zoom: 5
@@ -42,7 +42,7 @@ function initMap () {
   /*var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 55.53, lng: 9.4},
     zoom: 10
-  });*/
+  });
   var geocoder = new google.maps.Geocoder;
 
   var service = new google.maps.DistanceMatrixService;
@@ -101,4 +101,33 @@ function initMap () {
     }
     markersArray = [];
   }
+}*/
+
+/*const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3';
+const THE_MOVIE_DATABASE_KEY = 'f852305411e85c5520c80f92853fd711';
+
+const params = {
+	api_key: THE_MOVIE_DATABASE_KEY,
+	language: 'en-US',
+	page: 1
+};
+
+let data = $.getJSON(THE_MOVIE_DATABASE_ENDPOINT, params);
+console.log(data);
+*/
+
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=f852305411e85c5520c80f92853fd711",
+  "method": "GET",
+  "headers": {},
+  "data": "{}"
 }
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+
+
+

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Distance Matrix service</title>
+    <!--<title>Distance Matrix service</title>
     <style>
       #right-panel {
         font-family: 'Roboto','sans-serif';
@@ -42,12 +42,12 @@
   <body>
     <div id="right-panel">
       <div id="inputs">
-        <!--<pre>
+        <pre>
 var origin1 = {lat: 55.930, lng: -3.118};
 var origin2 = 'Greenwich, England';
 var destinationA = 'Stockholm, Sweden';
 var destinationB = {lat: 50.087, lng: 14.421};
-        </pre>-->
+        </pre>
       </div>
       <div>
         <strong>Results</strong>
@@ -56,7 +56,7 @@ var destinationB = {lat: 50.087, lng: 14.421};
     </div>
     <div id="map"></div>
 <script>
-  function initMap() {
+  /*function initMap() {
     var bounds = new google.maps.LatLngBounds;
     var markersArray = [];
 
@@ -131,10 +131,16 @@ var destinationB = {lat: 50.087, lng: 14.421};
       markersArray[i].setMap(null);
     }
     markersArray = [];
-  }
+  } */
 </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVOn7x1xNbdv1XJgTqsoBORyZ7q1HZkaM&callback=initMap"
-    async defer></script>
-    <!--<script src="app.js"></script> -->
+    async defer></script> -->
+  <body>
+  	<div class="movie-results"></div>
+  	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="app.js"></script>
   </body>
 </html>
