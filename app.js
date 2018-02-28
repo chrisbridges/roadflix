@@ -129,5 +129,7 @@ $.ajax(settings).done(function (response) {
   console.log(response);
 });
 
+// https://www.html5rocks.com/en/tutorials/cors/
+
 
 
