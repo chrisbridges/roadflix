@@ -103,7 +103,7 @@ $(getData);*/
   }
 }*/
 
-/*const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3';
+const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3/movie/popular';
 const THE_MOVIE_DATABASE_KEY = 'f852305411e85c5520c80f92853fd711';
 
 const params = {
@@ -112,12 +112,20 @@ const params = {
 	page: 1
 };
 
-let data = $.getJSON(THE_MOVIE_DATABASE_ENDPOINT, params);
+let data = $.getJSON(THE_MOVIE_DATABASE_ENDPOINT, params, displayMovies);
 console.log(data);
-*/
 
-var settings = {
-  "async": true,
+function displayMovies (response) {
+  let output = '';
+  response.results.forEach(function(movie) {
+    output += movie.title + '\n';
+  });
+  $('.movie-results').html(output);
+}
+
+//download allow-control-allow-origin: * extension for chrome
+
+/*  "async": true,
   "crossDomain": true,
   "url": "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=f852305411e85c5520c80f92853fd711",
   "method": "GET",
@@ -127,7 +135,7 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
   console.log(response);
-});
+});*/
 
 // https://www.html5rocks.com/en/tutorials/cors/
 
