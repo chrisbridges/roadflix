@@ -40,18 +40,25 @@ function retrieveMovies () {
     page: 1
   };
 
-  let data = $.getJSON(THE_MOVIE_DATABASE_ENDPOINT, params, displayMovies);
-  console.log(data);
+  $.getJSON(THE_MOVIE_DATABASE_ENDPOINT, params, displayMovies);
 }
 
 function displayMovies (response) {
   let movies = response.results;
-  popularMovies.push(movies);
+  //popularMovies.push(movies);
+  //console.log(popularMovies);
   let start = 0;
   let end = 5;
   let fiveMoviesToDisplay = movies.slice(start, end);
   const addMovieButton = `<button class="add-movie">Add to List</button>`;
 
+  function pushMoviesToStorage () {
+  	movies.forEach(function(movie) {
+  		popularMovies.push(movie);
+  	});
+  	console.log(popularMovies);
+  }
+  pushMoviesToStorage();
 
   function displayFiveMovies () {
     let output = '';
@@ -63,6 +70,15 @@ function displayMovies (response) {
     $('.movie-list').html(output);
   }
   displayFiveMovies();
+
+  function displayNextFiveMovies () {
+  	$('.next-button').on('click', function() {
+  		start += 5;
+	  	end += 5;
+	  	//this isn't working
+			displayFiveMovies();
+  	});
+  }
 }
 
 $('.load-movies').on('click', retrieveMovies);
