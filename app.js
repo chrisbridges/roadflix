@@ -1,24 +1,29 @@
+let tripTimeInSeconds;
 
 function getDistance() {
-     //Find the distance
-     let distanceService = new google.maps.DistanceMatrixService();
-     distanceService.getDistanceMatrix({
-        origins: ['San Francisco, California, USA'],
-        destinations: ['Los Angeles, California, USA'],
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.IMPERIAL,
-        //durationInTraffic: true,
-        avoidHighways: false,
-        avoidTolls: false
-    },
-    function (response, status) {
-	    if (status !== google.maps.DistanceMatrixStatus.OK) {
-	      console.log('Error:', status);
-	    } else {
-	      console.log(response);
-	    }
-    });
-  }
+	$('#trip-form').submit(function(event) {
+		event.preventDefault();
+		let distanceService = new google.maps.DistanceMatrixService();
+		distanceService.getDistanceMatrix({
+	  origins: [$('#origin').val()],
+	  destinations: [$('#destination').val()],
+	  travelMode: google.maps.TravelMode.DRIVING,
+	  unitSystem: google.maps.UnitSystem.IMPERIAL,
+	  //durationInTraffic: true,
+	  avoidHighways: false,
+	  avoidTolls: false
+	},
+		function (response, status) {
+		  if (status !== google.maps.DistanceMatrixStatus.OK) {
+		    console.log('Error:', status);
+		  } else {
+		    console.log(response);
+		    tripTimeInSeconds = response.rows[0].elements[0].duration.value;
+		    console.log(tripTimeInSeconds);
+		  }
+		});
+	});
+}
 
 const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3/movie/popular'; // for popular movies
 const THE_MOVIE_DATABASE_KEY = 'f852305411e85c5520c80f92853fd711';
@@ -59,5 +64,5 @@ function displayMovies (response) {
 }
 
 $('.load-movies').on('click', retrieveMovies);
-$(getDistance);
 
+$(getDistance);

@@ -9,12 +9,12 @@
   		<h1>RoadFlix</h1>
   		<h2>Tell us where you're going, and we'll suggest a playlist of movies that match the duration of your trip</h2>
   	</header>
-  	<form>
+  	<form id="trip-form">
   		<legend>Where are we going?</legend>
   		<label for="origin">Origin:</label>
-  		<input type="text" name="origin" placeholder="City, State">
+  		<input type="text" name="origin" id="origin" placeholder="City, State">
   		<label for="destination">Destination:</label>
-  		<input type="text" name="destination" placeholder="City, State">
+  		<input type="text" name="destination" id="destination" placeholder="City, State">
   		<button type="submit">Let's go</button>
   	</form>
   	<div class="trip">Looks like that trip will take about:<span class="trip-length"></span></div>
