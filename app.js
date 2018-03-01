@@ -125,7 +125,16 @@ function findRunTimeForMovie (movie) {
 
 	$.getJSON(movieDetailsEndpointWithID, params, function(response) {
 		movie.runtime = response.runtime;
-	});
+	}).done(totalRunTimeForUserMovies);
+}
+
+function totalRunTimeForUserMovies () {
+  let totalRunTime = 0;
+  let userMovieRunTimes = userMovies.forEach(function(movie) {
+    totalRunTime += movie.runtime;
+  });
+  $('.total-runtime').text(totalRunTime);
+  console.log(totalRunTime);
 }
 
 function displayUserList () {
@@ -139,7 +148,7 @@ function displayUserList () {
 
 function removeMovieFromUserList () {
 	$('.user-movies-list').on('click', '.remove-movie', function (event) {
-
+    
 	});
 }
 
