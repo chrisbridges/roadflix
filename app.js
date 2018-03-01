@@ -38,6 +38,7 @@ let start = 0;
 let end = resultsPerPage;
 let pageNumber = 1;
 const addMovieButton = `<button class="add-movie">Add to List</button>`;
+const removeMovieButton = `<button class="remove-movie">Remove</button>`;
 
 function retrieveFirstTwentyMovies () {
   $('.load-movies').on('click', function() {
@@ -105,10 +106,41 @@ function displayPrevFiveMovies () {
 
 function addMovieToUserList () {
   $('.movie-list').on('click', '.add-movie', function (event) {
-    //userMovies.push($(this).closest('li'));
-    console.log($(this).closest('li').index());
+  	let movieToAdd = popularMovies[$(this).closest('li').index() + start];
+    findRunTimeForMovie(movieToAdd);
+    userMovies.push(movieToAdd);
     console.log(userMovies);
+    displayUserList();
   });
+}
+
+function findRunTimeForMovie (movie) {
+	const THE_MOVIE_DATABASE_DETAILS_ENDPOINT = 'https://api.themoviedb.org/3/movie/';
+	const movieID = movie.id;
+	const movieDetailsEndpointWithID = `${THE_MOVIE_DATABASE_DETAILS_ENDPOINT + movieID}`
+	const params = {
+		api_key: THE_MOVIE_DATABASE_KEY,
+		language: 'en-US',
+	};
+
+	$.getJSON(movieDetailsEndpointWithID, params, function(response) {
+		movie.runtime = response.runtime;
+	});
+}
+
+function displayUserList () {
+	let output = '';
+  userMovies.forEach(function(movie) {
+    let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie["poster_path"]}`;
+    output += `<li><img src=${moviePoster} alt="${movie.title} poster"><br>${movie.title}<br>${removeMovieButton}</li>`;
+  });
+  $('.user-movies-list').html(output);
+}
+
+function removeMovieFromUserList () {
+	$('.user-movies-list').on('click', '.remove-movie', function (event) {
+
+	});
 }
 
 $(getDistance);
