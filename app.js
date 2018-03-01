@@ -32,6 +32,7 @@ const THE_MOVIE_DATABASE_KEY = 'f852305411e85c5520c80f92853fd711';
 const THE_MOVIE_DATABASE_IMAGE_BASEURL = 'https://image.tmdb.org/t/p';
 const THE_MOVIE_DATABASE_IMAGE_SIZE = '/w185';
 const popularMovies = [];
+const userMovies = [];
 const resultsPerPage = 5;
 let start = 0;
 let end = resultsPerPage;
@@ -71,7 +72,7 @@ function displayFiveMovies () {
   popularMovies.slice(start, end).forEach(function(movie) {
     let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie["poster_path"]}`;
     let movieRating = movie["vote_average"];
-    output += `<li><img src=${moviePoster}><br>${movie.title}<br>Rating: ${movieRating} / 10<br>${addMovieButton}</li>`;
+    output += `<li><img src=${moviePoster} alt="${movie.title} poster"><br>${movie.title}<br>Rating: ${movieRating} / 10<br>${addMovieButton}</li>`;
   });
   $('.movie-list').html(output);
 }
@@ -103,8 +104,10 @@ function displayPrevFiveMovies () {
 }
 
 function addMovieToUserList () {
-  $('.add-movie').on('click', function () {
-    
+  $('.movie-list').on('click', '.add-movie', function (event) {
+    //userMovies.push($(this).closest('li'));
+    console.log($(this).closest('li').index());
+    console.log(userMovies);
   });
 }
 
@@ -112,3 +115,6 @@ $(getDistance);
 $(retrieveFirstTwentyMovies);
 $(displayNextFiveMovies);
 $(displayPrevFiveMovies);
+$(addMovieToUserList);
+
+
