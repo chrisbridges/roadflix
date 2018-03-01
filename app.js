@@ -19,7 +19,9 @@ function getDistance() {
 		  } else {
 		    console.log(response);
 		    tripTimeInSeconds = response.rows[0].elements[0].duration.value;
-		    console.log(tripTimeInSeconds);
+		    $('.trip-origin').text(response.destinationAddresses[0]);
+		    $('.trip-destination').text(response.originAddresses[0]);
+		    $('.trip-length').text(response.rows[0].elements[0].duration.text);
 		  }
 		});
 	});
