@@ -1,4 +1,4 @@
-let tripTimeInSeconds;
+let tripTimeInSeconds = 0;
 
 function getDistance() {
 	$('#trip-form').submit(function(event) {
@@ -134,7 +134,8 @@ function totalRunTimeForUserMovies () {
     totalRunTime += movie.runtime;
   });
   $('.total-runtime').text(totalRunTime);
-  console.log(totalRunTime);
+  //console.log(totalRunTime);
+  haveEnoughMovies(totalRunTime);
 }
 
 function displayUserList () {
@@ -152,6 +153,14 @@ function removeMovieFromUserList () {
     $(this).closest('li').remove();
     totalRunTimeForUserMovies();
 	});
+}
+
+function haveEnoughMovies (totalRunTime) {
+  let tripTimeInMinutes = Math.round(tripTimeInSeconds / 60);
+  console.log(tripTimeInMinutes + ' ' + totalRunTime);
+  if (totalRunTime >= tripTimeInMinutes) {
+    console.log('Got enough movies!');
+  }
 }
 
 $(getDistance);
