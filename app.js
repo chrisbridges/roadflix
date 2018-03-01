@@ -148,7 +148,9 @@ function displayUserList () {
 
 function removeMovieFromUserList () {
 	$('.user-movies-list').on('click', '.remove-movie', function (event) {
-    
+    userMovies.splice($(this).closest('li').index(), 1);
+    $(this).closest('li').remove();
+    totalRunTimeForUserMovies();
 	});
 }
 
@@ -157,5 +159,6 @@ $(retrieveFirstTwentyMovies);
 $(displayNextFiveMovies);
 $(displayPrevFiveMovies);
 $(addMovieToUserList);
+$(removeMovieFromUserList);
 
 
