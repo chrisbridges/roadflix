@@ -159,7 +159,7 @@ function haveEnoughMovies (totalRunTime) {
   let tripTimeInMinutes = Math.round(tripTimeInSeconds / 60);
   console.log(tripTimeInMinutes + ' ' + totalRunTime);
   if (totalRunTime >= tripTimeInMinutes) {
-    console.log('Got enough movies!');
+    $('.user-movies').find('h3').append(` - You've got enough movies!`);
   }
 }
 
