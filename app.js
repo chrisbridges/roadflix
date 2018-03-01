@@ -42,7 +42,7 @@ function retrieveFirstTwentyMovies () {
   $('.load-movies').on('click', function() {
     retrieveMovies(pageNumber);
     $('.load-movies').hide();
-    $('.prev-button').show();
+    //$('.prev-button').show();
     $('.next-button').show();
   });
 }
@@ -85,14 +85,26 @@ function displayNextFiveMovies () {
     start += resultsPerPage;
     end += resultsPerPage;
     displayFiveMovies();
+    if (start >= resultsPerPage) {
+      $('.prev-button').show();
+    }
   });
 }
 
-function displayPrevFiveMovies () {
+function displayPrevFiveMovies () { 
   $('.prev-button').on('click', function() {
     start -= resultsPerPage;
     end -= resultsPerPage;
     displayFiveMovies();
+    if (start === 0) {
+      $('.prev-button').hide();
+    }
+  });
+}
+
+function addMovieToUserList () {
+  $('.add-movie').on('click', function () {
+    
   });
 }
 
