@@ -22,6 +22,7 @@ function getDistance() {
 		    $('.trip-origin').text(response.destinationAddresses[0]);
 		    $('.trip-destination').text(response.originAddresses[0]);
 		    $('.trip-length').text(response.rows[0].elements[0].duration.text);
+		    $('.load-movies').show();
 		  }
 		});
 	});
@@ -46,6 +47,7 @@ function retrieveFirstTwentyMovies () {
     $('.load-movies').hide();
     //$('.prev-button').show();
     $('.next-button').show();
+    $('.user-movies').show();
   });
 }
 
@@ -178,5 +180,5 @@ $(displayNextFiveMovies);
 $(displayPrevFiveMovies);
 $(addMovieToUserList);
 $(removeMovieFromUserList);
-//$(displayMovieInfoOnMouseOver);
+$(displayMovieInfoOnMouseOver);
 

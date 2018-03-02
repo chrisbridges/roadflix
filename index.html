@@ -18,16 +18,16 @@
   		<button type="submit">Let's go</button>
   	</form>
   	<div class="trip">Looks like your trip from <span class="trip-origin"></span> to <span class="trip-destination"></span> will take about: <span class="trip-length"></span></div>
-  	<button class="load-movies">Now let's find some movies to watch</button>
+  	<button hidden class="load-movies">Now let's find some movies to watch</button>
   	<div class="movie-results">
   		<ul class="movie-list"></ul>
   	</div>
-  	<div class="user-movies">
+    <button hidden class="prev-button">Prev</button>
+    <button hidden class="next-button">Next</button>
+  	<div hidden class="user-movies">
       <h3>Total Runtime: <span class="total-runtime">0</span> min<span hidden class="enough-movies-toggle"> - You've got enough movies!</span></h3>
   		<ul class="user-movies-list"></ul>
   	</div>
-    <button hidden class="prev-button">Prev</button>
-    <button hidden class="next-button">Next</button>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVOn7x1xNbdv1XJgTqsoBORyZ7q1HZkaM"></script>
     <script
 		  src="https://code.jquery.com/jquery-3.3.1.min.js"
