@@ -24,6 +24,7 @@ function getDistance() {
 		    $('.trip-destination').text(response.originAddresses[0]);
 		    $('.trip-length').text(response.rows[0].elements[0].duration.text);
 		    $('.load-movies').show();
+        haveEnoughMovies();
 		  }
 		});
 	});

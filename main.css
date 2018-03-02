@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+legend {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  display: block;
+  margin: 10px auto;
+  height: 30px;
+  width: 70%;
+  max-width: 400px;
+  font-size: 16px;
+}
+
+button[type="submit"], .load-movies {
+  margin-top: 15px;
+  width: 50%;
+  max-width: 200px;
+  height: 30px;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.trip {
+  font-size: 16px;
+}
+
+.trip-origin, .trip-destination {
+  text-decoration: underline;
+}
+
+.trip-length {
+  margin: 10px 0;
+  font-weight: bold;
+  display: block;
+}
+
+.load-movies {
+
+}
