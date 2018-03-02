@@ -32,7 +32,7 @@ input {
   font-size: 16px;
 }
 
-button[type="submit"], .load-movies {
+button[type="submit"] {
   margin-top: 15px;
   width: 50%;
   max-width: 200px;
@@ -53,8 +53,13 @@ button[type="submit"], .load-movies {
   margin: 10px 0;
   font-weight: bold;
   display: block;
+  font-size: 20px;
 }
 
 .load-movies {
 
+}
+
+.movie-list, .user-movies-list {
+  list-style: none;
 }
