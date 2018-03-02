@@ -81,12 +81,12 @@ function displayFiveMovies () {
     	<li>
 	    	<div class="container">
 		    	<img src=${moviePoster} alt="${movie.title} poster"><br>
-		    	${movie.title}<br>
-		    	Rating: ${movieRating} / 10<br>
 			    <div class="overlay">
 			    	<p>${movie.overview}</p>
 			    </div>
 		    </div>
+        ${movie.title}<br>
+          Rating: ${movieRating} / 10<br>
 	    	${addMovieButton}
     	</li>`;
   });

@@ -66,6 +66,9 @@ button[type="submit"] {
 
 .container {
 	position: relative;
+  width: 185px;
+  height: 278px;
+  margin: 0 auto;
 }
 
 .container img {
@@ -83,12 +86,11 @@ button[type="submit"] {
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
   height: 100%;
   /*transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);*/
   text-align: center;
+  overflow: hidden;
 }
 
 .container:hover .image {
@@ -96,12 +98,14 @@ button[type="submit"] {
 }
 
 .container:hover .overlay {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .overlay p {
   background-color: black;
   color: white;
-  font-size: 16px;
-  padding: 16px 32px;
+  font-size: 15px;
+  padding: 10px 12px;
+  height: 100%;
+  margin: 0;
 }
