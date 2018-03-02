@@ -111,6 +111,8 @@ function addMovieToUserList () {
     userMovies.push(movieToAdd);
     console.log(userMovies);
     displayUserList();
+    //$(this).closest('button').toggleClass('hide');
+    //haveEnoughMovies();
   });
 }
 
@@ -158,9 +160,16 @@ function removeMovieFromUserList () {
 function haveEnoughMovies (totalRunTime) {
   let tripTimeInMinutes = Math.round(tripTimeInSeconds / 60);
   console.log(tripTimeInMinutes + ' ' + totalRunTime);
-  if (totalRunTime >= tripTimeInMinutes) {
-    $('.user-movies').find('h3').append(` - You've got enough movies!`);
+  if (totalRunTime >= tripTimeInMinutes && tripTimeInMinutes > 0) {
+    $('.enough-movies-toggle').show();
+  } else {
+  	$('.enough-movies-toggle').hide();
   }
+}
+
+function displayMovieInfoOnMouseOver () {
+	$('.movie-list').mouseover();
+	$('.movie-list').mouseout();
 }
 
 $(getDistance);
@@ -169,5 +178,5 @@ $(displayNextFiveMovies);
 $(displayPrevFiveMovies);
 $(addMovieToUserList);
 $(removeMovieFromUserList);
-
+//$(displayMovieInfoOnMouseOver);
 
