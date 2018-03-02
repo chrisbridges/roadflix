@@ -77,7 +77,18 @@ function displayFiveMovies () {
   popularMovies.slice(start, end).forEach(function(movie) {
     let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie["poster_path"]}`;
     let movieRating = movie["vote_average"];
-    output += `<li><img src=${moviePoster} alt="${movie.title} poster"><br>${movie.title}<br>Rating: ${movieRating} / 10<br>${addMovieButton}</li>`;
+    output += `
+    	<li>
+	    	<div class="container">
+		    	<img src=${moviePoster} alt="${movie.title} poster"><br>
+		    	${movie.title}<br>
+		    	Rating: ${movieRating} / 10<br>
+			    <div class="overlay">
+			    	<p>${movie.overview}</p>
+			    </div>
+		    </div>
+	    	${addMovieButton}
+    	</li>`;
   });
   $('.movie-list').html(output);
 }

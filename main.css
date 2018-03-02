@@ -63,3 +63,45 @@ button[type="submit"] {
 .movie-list, .user-movies-list {
   list-style: none;
 }
+
+.container {
+	position: relative;
+}
+
+.container img {
+	opacity: 1;
+  /*display: block;
+  /*width: 100%;*/
+  /*height: auto;*/
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.overlay {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  /*transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);*/
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: 0.3;
+}
+
+.container:hover .overlay {
+  opacity: 0.8;
+}
+
+.overlay p {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
