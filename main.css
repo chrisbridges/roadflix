@@ -68,6 +68,12 @@ input:focus {
   box-shadow: 0 0 10px #B9090B;
 }
 
+button {
+  border-radius: 5px;
+  border: none;
+  -webkit-appearance: none;
+}
+
 button[type="submit"] {
   margin-top: 15px;
   width: 50%;
@@ -121,12 +127,6 @@ button[type="submit"]:hover, .load-movies:hover, button[type="submit"]:focus, .l
 
 .movie-list, .user-movies-list {
   list-style: none;
-}
-
-button {
-  border-radius: 5px;
-  border: none;
-  /*-webkit-appearance: button;*/
 }
 
 .prev-button, .next-button {
