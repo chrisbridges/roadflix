@@ -4,20 +4,18 @@ function getDistance() {
 	$('#trip-form').submit(function(event) {
 		event.preventDefault();
 		let distanceService = new google.maps.DistanceMatrixService();
-		distanceService.getDistanceMatrix({
-	  origins: [$('#origin').val()],
-	  destinations: [$('#destination').val()],
-	  travelMode: google.maps.TravelMode.DRIVING,
-	  unitSystem: google.maps.UnitSystem.IMPERIAL,
-	  //durationInTraffic: true,
-	  avoidHighways: false,
-	  avoidTolls: false
+  		distanceService.getDistanceMatrix({
+  	  origins: [$('#origin').val()],
+  	  destinations: [$('#destination').val()],
+  	  travelMode: google.maps.TravelMode.DRIVING,
+  	  unitSystem: google.maps.UnitSystem.IMPERIAL,
+  	  avoidHighways: false,
+  	  avoidTolls: false
 	},
 		function (response, status) {
 		  if (status !== google.maps.DistanceMatrixStatus.OK) {
 		    console.log('Error:', status);
 		  } else {
-		    console.log(response);
 		    tripTimeInSeconds = response.rows[0].elements[0].duration.value;
         $('.trip').show();
 		    $('.trip-origin').text(response.destinationAddresses[0]);
@@ -47,7 +45,6 @@ function retrieveFirstTwentyMovies () {
   $('.load-movies').on('click', function() {
     retrieveMovies(pageNumber);
     $('.load-movies').hide();
-    //$('.prev-button').show();
     $('.next-button').show();
     $('.user-movies').show();
   });
@@ -59,7 +56,6 @@ function retrieveMovies (pageNumber) {
     language: 'en-US',
     page: pageNumber
   };
-  // done ensures movies are only displayed after properly stored - ask Jillian for more details
   $.getJSON(THE_MOVIE_DATABASE_ENDPOINT, params, pushMoviesToStorage).done(displayFiveMovies);
 }
 
@@ -128,15 +124,13 @@ function addMovieToUserList () {
     userMovies.push(movieToAdd);
     console.log(userMovies);
     displayUserList();
-    //$(this).closest('button').toggleClass('hide');
-    //haveEnoughMovies();
   });
 }
 
 function findRunTimeForMovie (movie) {
 	const THE_MOVIE_DATABASE_DETAILS_ENDPOINT = 'https://api.themoviedb.org/3/movie/';
 	const movieID = movie.id;
-	const movieDetailsEndpointWithID = `${THE_MOVIE_DATABASE_DETAILS_ENDPOINT + movieID}`
+	const movieDetailsEndpointWithID = `${THE_MOVIE_DATABASE_DETAILS_ENDPOINT + movieID}`;
 	const params = {
 		api_key: THE_MOVIE_DATABASE_KEY,
 		language: 'en-US',
@@ -153,7 +147,6 @@ function totalRunTimeForUserMovies () {
     totalRunTime += movie.runtime;
   });
   $('.total-runtime').text(totalRunTime);
-  //console.log(totalRunTime);
   haveEnoughMovies(totalRunTime);
 }
 
@@ -188,17 +181,11 @@ function removeMovieFromUserList () {
 
 function haveEnoughMovies (totalRunTime) {
   let tripTimeInMinutes = Math.round(tripTimeInSeconds / 60);
-  console.log(tripTimeInMinutes + ' ' + totalRunTime);
   if (totalRunTime >= tripTimeInMinutes && tripTimeInMinutes > 0) {
     $('.enough-movies-toggle').show();
   } else {
   	$('.enough-movies-toggle').hide();
   }
-}
-
-function displayMovieInfoOnMouseOver () {
-	$('.movie-list').mouseover();
-	$('.movie-list').mouseout();
 }
 
 function limitDescriptionLength (description) {
@@ -214,5 +201,4 @@ $(displayNextFiveMovies);
 $(displayPrevFiveMovies);
 $(addMovieToUserList);
 $(removeMovieFromUserList);
-$(displayMovieInfoOnMouseOver);
 
