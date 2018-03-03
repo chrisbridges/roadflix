@@ -19,6 +19,8 @@ h1 .flix {
 
 h2 {
   font-size: 22px;
+  width: 80%;
+  margin: 15px auto;
 }
 
 #trip-form {
