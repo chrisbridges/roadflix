@@ -21,8 +21,10 @@ function getDistance() {
 		    $('.trip-origin').text(response.destinationAddresses[0]);
 		    $('.trip-destination').text(response.originAddresses[0]);
 		    $('.trip-length').text(response.rows[0].elements[0].duration.text);
-		    $('.load-movies').show();
         haveEnoughMovies();
+		    if (popularMovies.length === 0) { // if user decides to change trip locations, this prevents button from unnecessarily showing again
+          $('.load-movies').show();
+        }
 		  }
 		});
 	});
