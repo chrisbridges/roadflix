@@ -14,7 +14,7 @@ function getDistance() {
 	},
 		function (response, status) {
 		  if (status !== google.maps.DistanceMatrixStatus.OK) {
-		    console.log('Error:', status);
+		    alert('We\'re having some trouble loading that location right now. Try being more specific or entering a different location.');
 		  } else {
 		    tripTimeInSeconds = response.rows[0].elements[0].duration.value;
         $('.trip').show();
@@ -28,7 +28,7 @@ function getDistance() {
 	});
 }
 
-const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3/movie/popular'; // for popular movies
+const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3/movie/popular';
 const THE_MOVIE_DATABASE_KEY = 'f852305411e85c5520c80f92853fd711';
 const THE_MOVIE_DATABASE_IMAGE_BASEURL = 'https://image.tmdb.org/t/p';
 const THE_MOVIE_DATABASE_IMAGE_SIZE = '/w185';
@@ -56,7 +56,7 @@ function retrieveMovies (pageNumber) {
     language: 'en-US',
     page: pageNumber
   };
-  $.getJSON(THE_MOVIE_DATABASE_ENDPOINT, params, pushMoviesToStorage).done(displayFiveMovies);
+  $.getJSON(THE_MOVIE_DATABASE_ENDPOINT, params, pushMoviesToStorage).done(displayMovies);
 }
 
 function pushMoviesToStorage (response) {
@@ -67,8 +67,7 @@ function pushMoviesToStorage (response) {
   console.log(popularMovies);
 }
 
-function displayFiveMovies () {
-  console.log(start + ' ' +  end);
+function displayMovies () {
   let output = '';
   popularMovies.slice(start, end).forEach(function(movie) {
     let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie["poster_path"]}`;
@@ -77,7 +76,7 @@ function displayFiveMovies () {
     	<li>
     		<div class="movie-result">
 		    	<div class="container">
-			    	<img src=${moviePoster} alt="${movie.title} poster"><br>
+			    	<img src=${moviePoster} alt="${movie.title} poster">
 				    <div class="overlay">
 				    	<p>${limitDescriptionLength(movie.overview)}</p>
 				    </div>
@@ -91,7 +90,7 @@ function displayFiveMovies () {
   $('.movie-list').html(output);
 }
 
-function displayNextFiveMovies () {
+function displayNextMovies () {
   $('.next-button').on('click', function() {
     if (end >= popularMovies.length) {
       pageNumber++;
@@ -99,18 +98,18 @@ function displayNextFiveMovies () {
     }
     start += resultsPerPage;
     end += resultsPerPage;
-    displayFiveMovies();
+    displayMovies();
     if (start >= resultsPerPage) {
       $('.prev-button').show();
     }
   });
 }
 
-function displayPrevFiveMovies () { 
+function displayPrevMovies () { 
   $('.prev-button').on('click', function() {
     start -= resultsPerPage;
     end -= resultsPerPage;
-    displayFiveMovies();
+    displayMovies();
     if (start === 0) {
       $('.prev-button').hide();
     }
@@ -122,9 +121,37 @@ function addMovieToUserList () {
   	let movieToAdd = popularMovies[$(this).closest('li').index() + start];
     findRunTimeForMovie(movieToAdd);
     userMovies.push(movieToAdd);
-    console.log(userMovies);
     displayUserList();
   });
+}
+
+function removeMovieFromUserList () {
+  $('.user-movies-list').on('click', '.remove-movie', function (event) {
+    userMovies.splice($(this).closest('li').index(), 1);
+    $(this).closest('li').remove();
+    totalRunTimeForUserMovies();
+  });
+}
+
+function displayUserList () {
+  let output = '';
+  userMovies.forEach(function(movie) {
+    let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie["poster_path"]}`;
+    output += `
+      <li>
+        <div class="movie-result">
+          <div class="container">
+            <img src=${moviePoster} alt="${movie.title} poster">
+            <div class="overlay">
+              <p>${limitDescriptionLength(movie.overview)}</p>
+            </div>
+          </div>
+            <p>${movie.title}</p>
+          ${removeMovieButton}
+        </div>
+      </li>`;
+  });
+  $('.user-movies-list').html(output);
 }
 
 function findRunTimeForMovie (movie) {
@@ -133,7 +160,7 @@ function findRunTimeForMovie (movie) {
 	const movieDetailsEndpointWithID = `${THE_MOVIE_DATABASE_DETAILS_ENDPOINT + movieID}`;
 	const params = {
 		api_key: THE_MOVIE_DATABASE_KEY,
-		language: 'en-US',
+		language: 'en-US'
 	};
 
 	$.getJSON(movieDetailsEndpointWithID, params, function(response) {
@@ -148,35 +175,6 @@ function totalRunTimeForUserMovies () {
   });
   $('.total-runtime').text(totalRunTime);
   haveEnoughMovies(totalRunTime);
-}
-
-function displayUserList () {
-	let output = '';
-  userMovies.forEach(function(movie) {
-    let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie["poster_path"]}`;
-    output += `
-    	<li>
-    		<div class="movie-result">
-		    	<div class="container">
-			    	<img src=${moviePoster} alt="${movie.title} poster"><br>
-				    <div class="overlay">
-				    	<p>${limitDescriptionLength(movie.overview)}</p>
-				    </div>
-			    </div>
-	        	<p>${movie.title}</p>
-		    	${removeMovieButton}
-		    </div>
-    	</li>`;
-  });
-  $('.user-movies-list').html(output);
-}
-
-function removeMovieFromUserList () {
-	$('.user-movies-list').on('click', '.remove-movie', function (event) {
-    userMovies.splice($(this).closest('li').index(), 1);
-    $(this).closest('li').remove();
-    totalRunTimeForUserMovies();
-	});
 }
 
 function haveEnoughMovies (totalRunTime) {
@@ -197,8 +195,8 @@ function limitDescriptionLength (description) {
 
 $(getDistance);
 $(retrieveFirstTwentyMovies);
-$(displayNextFiveMovies);
-$(displayPrevFiveMovies);
+$(displayNextMovies);
+$(displayPrevMovies);
 $(addMovieToUserList);
 $(removeMovieFromUserList);
 
