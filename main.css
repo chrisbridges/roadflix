@@ -207,6 +207,7 @@ a:hover {
   font-size: 16px;
   padding: 5px 10px;
   border: none;
+  height: 98px;
 }
 
 .add-movie:hover, .add-movie:focus, .remove-movie:hover, .remove-movie:focus {
