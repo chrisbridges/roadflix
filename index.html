@@ -1,34 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
   	<title>RoadFlix</title>
+    <meta charset="utf-8">
+    <meta name="description" content="RoadFlix is an app that helps you find movies to watch on your next trip.">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   	<link rel="stylesheet" type="text/css" href="main.css">
   </head>
   <body>
-  	<header>
+  	<header role ="banner">
   		<h1>Road<span class="flix">Flix</span></h1>
   		<h2>Tell us where you're going, and we'll suggest a playlist of movies that match the duration of your trip</h2>
   	</header>
-  	<form id="trip-form">
-  		<legend>Where are we going?</legend>
-  		<label for="origin">Origin:</label>
-  		<input type="text" name="origin" id="origin" placeholder="City, State" required>
-  		<label for="destination">Destination:</label>
-  		<input type="text" name="destination" id="destination" placeholder="City, State" required>
-  		<button type="submit">Let's go!</button>
-  	</form>
-  	<div hidden class="trip">Looks like your trip from <span class="trip-origin"></span> to <span class="trip-destination"></span> will take about: <span class="trip-length"></span></div>
-  	<button hidden class="load-movies">Let's find some movies to watch</button>
-  	<div class="movie-results">
-  		<ul class="movie-list"></ul>
-  	</div>
-    <button hidden class="prev-button">Prev</button>
-    <button hidden class="next-button">Next</button>
-  	<div hidden class="user-movies">
-      <h3>Total Runtime: <span class="total-runtime">0</span> min<span hidden class="enough-movies-toggle"> - You've got enough movies!</span></h3>
-  		<ul class="user-movies-list"></ul>
-  	</div>
+    	<form id="trip-form">
+    		<legend>Where are we going?</legend>
+    		<label for="origin">Origin:</label>
+    		<input type="text" name="origin" id="origin" placeholder="City, State" required>
+    		<label for="destination">Destination:</label>
+    		<input type="text" name="destination" id="destination" placeholder="City, State" required>
+    		<button type="submit">Let's go!</button>
+    	</form>
+    <main role="main" aria-live="assertive">
+    	<div hidden class="trip">Looks like your trip from <span class="trip-origin"></span> to <span class="trip-destination"></span> will take about: <span class="trip-length"></span>
+      </div>
+    	<button hidden class="load-movies">Let's find some movies to watch</button>
+    	<div class="movie-results">
+    		<ul class="movie-list"></ul>
+    	</div>
+      <button hidden class="prev-button">Prev</button>
+      <button hidden class="next-button">Next</button>
+    	<div hidden class="user-movies">
+        <h3>Total Runtime: <span class="total-runtime">0</span> min<span hidden class="enough-movies-toggle"> - You've got enough movies!</span></h3>
+    		<ul class="user-movies-list"></ul>
+    	</div>
+    </main>
     <footer>
       <p>Powered by <a href="https://developers.google.com/maps/documentation/javascript/">Google Maps API</a> and <a href="https://www.themoviedb.org/documentation/api">The Movie Database</a></p>
     </footer>

@@ -77,13 +77,10 @@ button[type="submit"] {
   background-color: #B9090B;
 }
 
-button[type="submit"]:hover, .load-movies:hover {
-  color: white;
-  background-color: black;
-  border: 1px solid white;
-}
-
-button[type="submit"]:focus {
+button[type="submit"]:hover, .load-movies:hover, button[type="submit"]:focus, .load-movies:focus {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
   outline: none !important;
   border-color: black;
   box-shadow: 0 0 10px black;
@@ -117,7 +114,7 @@ button[type="submit"]:focus {
   padding: 10px 20px;
   max-width: 400px;
   color: white;
-  border: none;
+  border: 1px solid #B9090B;
 }
 
 .movie-list, .user-movies-list {
