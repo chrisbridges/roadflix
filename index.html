@@ -2,6 +2,7 @@
 <html>
   <head>
   	<title>RoadFlix</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   	<link rel="stylesheet" type="text/css" href="main.css">
   </head>
   <body>
@@ -12,9 +13,9 @@
   	<form id="trip-form">
   		<legend>Where are we going?</legend>
   		<label for="origin">Origin:</label>
-  		<input type="text" name="origin" id="origin" placeholder="City, State">
+  		<input type="text" name="origin" id="origin" placeholder="City, State" required>
   		<label for="destination">Destination:</label>
-  		<input type="text" name="destination" id="destination" placeholder="City, State">
+  		<input type="text" name="destination" id="destination" placeholder="City, State" required>
   		<button type="submit">Let's go</button>
   	</form>
   	<div hidden class="trip">Looks like your trip from <span class="trip-origin"></span> to <span class="trip-destination"></span> will take about: <span class="trip-length"></span></div>
@@ -29,7 +30,7 @@
   		<ul class="user-movies-list"></ul>
   	</div>
     <footer>
-      <p>Powered by <a href="#">Google Maps API</a> and <a href="#">The Movie Database</a></p>
+      <p>Powered by <a href="https://developers.google.com/maps/documentation/javascript/">Google Maps API</a> and <a href="https://www.themoviedb.org/documentation/api">The Movie Database</a></p>
     </footer>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVOn7x1xNbdv1XJgTqsoBORyZ7q1HZkaM"></script>
     <script

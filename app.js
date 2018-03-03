@@ -79,15 +79,17 @@ function displayFiveMovies () {
     let movieRating = movie["vote_average"];
     output += `
     	<li>
-	    	<div class="container">
-		    	<img src=${moviePoster} alt="${movie.title} poster"><br>
-			    <div class="overlay">
-			    	<p>${movie.overview}</p>
+    		<div class="movie-result">
+		    	<div class="container">
+			    	<img src=${moviePoster} alt="${movie.title} poster"><br>
+				    <div class="overlay">
+				    	<p>${limitDescriptionLength(movie.overview)}</p>
+				    </div>
 			    </div>
+	        	<p>${movie.title}</p>
+	          <p>Rating: ${movieRating} / 10</p>
+		    	${addMovieButton}
 		    </div>
-        ${movie.title}<br>
-          Rating: ${movieRating} / 10<br>
-	    	${addMovieButton}
     	</li>`;
   });
   $('.movie-list').html(output);
@@ -159,7 +161,19 @@ function displayUserList () {
 	let output = '';
   userMovies.forEach(function(movie) {
     let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie["poster_path"]}`;
-    output += `<li><img src=${moviePoster} alt="${movie.title} poster"><br>${movie.title}<br>${removeMovieButton}</li>`;
+    output += `
+    	<li>
+    		<div class="movie-result">
+		    	<div class="container">
+			    	<img src=${moviePoster} alt="${movie.title} poster"><br>
+				    <div class="overlay">
+				    	<p>${limitDescriptionLength(movie.overview)}</p>
+				    </div>
+			    </div>
+	        	<p>${movie.title}</p>
+		    	${removeMovieButton}
+		    </div>
+    	</li>`;
   });
   $('.user-movies-list').html(output);
 }
@@ -185,6 +199,13 @@ function haveEnoughMovies (totalRunTime) {
 function displayMovieInfoOnMouseOver () {
 	$('.movie-list').mouseover();
 	$('.movie-list').mouseout();
+}
+
+function limitDescriptionLength (description) {
+	if (description.length > 260) {
+		return description.substring(0, 261) + '...';
+	}
+	return description;
 }
 
 $(getDistance);
