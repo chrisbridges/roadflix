@@ -124,7 +124,7 @@ button[type="submit"]:hover, .load-movies:hover, button[type="submit"]:focus, .l
 button {
   border-radius: 5px;
   border: none;
-  -webkit-appearance: button;
+  /*-webkit-appearance: button;*/
 }
 
 .prev-button, .next-button {
@@ -208,7 +208,7 @@ a:hover {
   font-size: 16px;
   padding: 5px 10px;
   border: none;
-  /*height: 98px;*/
+  background-color: white;
 }
 
 .add-movie:hover, .add-movie:focus, .remove-movie:hover, .remove-movie:focus {
