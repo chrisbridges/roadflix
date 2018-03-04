@@ -40,8 +40,7 @@ const resultsPerPage = 5;
 let start = 0;
 let end = resultsPerPage;
 let pageNumber = 1;
-const addMovieButton = `<button class="add-movie">Add to List</button>`;
-const removeMovieButton = `<button class="remove-movie">Remove</button>`;
+
 
 function retrieveFirstTwentyMovies () {
   $('.load-movies').on('click', function() {
@@ -70,6 +69,8 @@ function pushMoviesToStorage (response) {
 }
 
 function displayMovies () {
+  const addMovieButton = `<button class="add-movie">Add to List</button>`;
+
   let output = '';
   popularMovies.slice(start, end).forEach(function(movie) {
     let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie["poster_path"]}`;
@@ -137,6 +138,8 @@ function removeMovieFromUserList () {
 }
 
 function displayUserList () {
+  const removeMovieButton = `<button class="remove-movie">Remove</button>`;
+
   let output = '';
   userMovies.forEach(function(movie) {
     let moviePoster = `${THE_MOVIE_DATABASE_IMAGE_BASEURL + THE_MOVIE_DATABASE_IMAGE_SIZE + movie["poster_path"]}`;
