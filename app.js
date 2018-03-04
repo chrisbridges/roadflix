@@ -13,7 +13,7 @@ function getDistance() {
   	  avoidTolls: false
 	},
 		function (response, status) {
-		  if (status !== distanceService.OK) {
+		  if (status !== google.maps.DistanceMatrixStatus.OK) {
 		    alert('We\'re having some trouble loading that location right now. Try being more specific or entering a different location.');
 		  } else {
 		    tripTimeInSeconds = response.rows[0].elements[0].duration.value;
