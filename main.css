@@ -24,7 +24,6 @@ h2 {
 }
 
 #trip-form {
-  /*border: 2px solid black;*/
   background-color: #d3d3d3;
   color: black;
   width: 80%;
@@ -143,16 +142,12 @@ button[type="submit"]:hover, .load-movies:hover, button[type="submit"]:focus, .l
 	position: relative;
   width: 100%;
   max-width: 185px; /* size of image */
-  /*height: 100%;*/
   max-height: 278px;
   margin: 15px auto;
 }
 
 .container img {
 	opacity: 1;
-  /*display: block;
-  /*width: 100%;*/
-  /*height: auto;*/
   transition: .5s ease;
   backface-visibility: hidden;
   box-shadow: 10px 10px 5px grey;
@@ -221,7 +216,6 @@ a:hover {
   box-shadow: 0 0 10px white;
 }
 
-/* LOOK AT NETFLIX FOR SOME DESIGN INSPIRATION */
 @media only screen and (min-width: 640px) {
 
 	ul li {
@@ -237,9 +231,5 @@ a:hover {
   .trip-length {
     font-size: 24px;
   }
-
-	.movie-list, .user-movies-list {
-
-	}
 
 }
