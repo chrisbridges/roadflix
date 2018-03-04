@@ -216,6 +216,11 @@ a:hover {
   box-shadow: 0 0 10px white;
 }
 
+.user-movies-list-placeholder {
+  margin: 0 auto;
+  font-style: italic;
+}
+
 @media only screen and (min-width: 640px) {
 
 	ul li {

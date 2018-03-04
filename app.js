@@ -123,6 +123,7 @@ function addMovieToUserList () {
   	let movieToAdd = popularMovies[$(this).closest('li').index() + start];
     findRunTimeForMovie(movieToAdd);
     userMovies.push(movieToAdd);
+    $('.user-movies-list-placeholder').hide();
     displayUserList();
   });
 }
