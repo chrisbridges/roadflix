@@ -13,7 +13,7 @@ function getDistance() {
   	  avoidTolls: false
 	},
 		function (response, status) {
-		  if (status !== google.maps.DistanceMatrixStatus.OK) {
+		  if (status !== distanceService.OK) {
 		    alert('We\'re having some trouble loading that location right now. Try being more specific or entering a different location.');
 		  } else {
 		    tripTimeInSeconds = response.rows[0].elements[0].duration.value;
@@ -178,8 +178,8 @@ function totalRunTimeForUserMovies () {
   let userMovieRunTimes = userMovies.forEach(function(movie) {
     totalRunTime += movie.runtime;
   });
-  $('.total-runtime').text(totalRunTime);
   haveEnoughMovies(totalRunTime);
+  $('.total-runtime').text(convertTotalRunTimeIntoHours(totalRunTime));
 }
 
 function haveEnoughMovies (totalRunTime) {
@@ -189,6 +189,18 @@ function haveEnoughMovies (totalRunTime) {
   } else {
   	$('.enough-movies-toggle').hide();
   }
+}
+
+function convertTotalRunTimeIntoHours (totalRunTime) {
+  let hours = 0;
+  if (totalRunTime >= 60) {
+    while (totalRunTime >= 60) {
+      hours++;
+      totalRunTime -= 60;
+    }
+  }
+  let minutes = totalRunTime;
+  return `${hours} hours ${minutes} mins`;
 }
 
 function limitDescriptionLength (description) {
