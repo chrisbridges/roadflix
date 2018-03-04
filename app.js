@@ -41,7 +41,6 @@ let start = 0;
 let end = resultsPerPage;
 let pageNumber = 1;
 
-
 function retrieveFirstTwentyMovies () {
   $('.load-movies').on('click', function() {
     retrieveMovies(pageNumber);

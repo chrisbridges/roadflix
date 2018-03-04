@@ -12,7 +12,7 @@
   		<h1>Road<span class="flix">Flix</span></h1>
   		<h2>Tell us where you're going, and we'll suggest a playlist of movies that match the duration of your trip</h2>
   	</header>
-    	<form id="trip-form">
+    	<form role="form" id="trip-form">
     		<legend>Where are we going?</legend>
     		<label for="origin">Origin:</label>
     		<input type="text" name="origin" id="origin" placeholder="City, State" required>
@@ -35,7 +35,7 @@
     		<ul class="user-movies-list"></ul>
     	</div>
     </main>
-    <footer>
+    <footer role="contentinfo">
       <p>Powered by <a href="https://developers.google.com/maps/documentation/javascript/">Google Maps API</a> and <a href="https://www.themoviedb.org/documentation/api">The Movie Database</a></p>
     </footer>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVOn7x1xNbdv1XJgTqsoBORyZ7q1HZkaM"></script>
