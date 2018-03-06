@@ -12,7 +12,7 @@ function getDistance() {
   	  avoidHighways: false,
   	  avoidTolls: false
 	},
-		function (response, status) {
+		function (response, status) { // check that user inputs are valid
 		  if (status !== google.maps.DistanceMatrixStatus.OK || response.rows[0].elements[0].status === 'NOT_FOUND') {
 		    alert('We\'re having some trouble loading that location right now. Try being more specific or entering a different location.');
 		  } else {
@@ -181,7 +181,7 @@ function totalRunTimeForUserMovies () {
   haveEnoughMovies(totalRunTime);
   $('.total-runtime').text(convertTotalRunTimeIntoHours(totalRunTime));
 }
-// tells user whether or not their movie run time meets or exceeds the duration of their trip
+// tells user whether or not their total movie run time meets or exceeds the duration of their trip
 function haveEnoughMovies (totalRunTime) {
   let tripTimeInMinutes = Math.round(tripTimeInSeconds / 60);
   if (totalRunTime >= tripTimeInMinutes && tripTimeInMinutes > 0) {
