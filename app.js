@@ -1,5 +1,5 @@
 let tripTimeInSeconds = 0;
-
+// calling the Google Maps API to calculate distance / time between user inputs
 function getDistance() {
 	$('#trip-form').submit(function(event) {
 		event.preventDefault();
@@ -13,7 +13,7 @@ function getDistance() {
   	  avoidTolls: false
 	},
 		function (response, status) {
-		  if (status !== google.maps.DistanceMatrixStatus.OK) {
+		  if (status !== google.maps.DistanceMatrixStatus.OK || response.rows[0].elements[0].status === 'NOT_FOUND') {
 		    alert('We\'re having some trouble loading that location right now. Try being more specific or entering a different location.');
 		  } else {
 		    tripTimeInSeconds = response.rows[0].elements[0].duration.value;
@@ -30,17 +30,17 @@ function getDistance() {
 	});
 }
 
-const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3/movie/popular';
+const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3/movie/popular'; // popular movies endpoint
 const THE_MOVIE_DATABASE_KEY = 'f852305411e85c5520c80f92853fd711';
-const THE_MOVIE_DATABASE_IMAGE_BASEURL = 'https://image.tmdb.org/t/p';
+const THE_MOVIE_DATABASE_IMAGE_BASEURL = 'https://image.tmdb.org/t/p'; // endpoint for movie posters
 const THE_MOVIE_DATABASE_IMAGE_SIZE = '/w185';
-const popularMovies = [];
-const userMovies = [];
-const resultsPerPage = 5;
+const popularMovies = []; // storage for movies called through the popular movies endpoint
+const userMovies = []; // storage for movies that user has added to their playlist
+const resultsPerPage = 5; // number of movies displayed at once
 let start = 0;
 let end = resultsPerPage;
-let pageNumber = 1;
-
+let pageNumber = 1; // page number of results for popular movies endpoint
+// retrieves first page of movies and shows buttons to continue user flow
 function retrieveFirstTwentyMovies () {
   $('.load-movies').on('click', function() {
     retrieveMovies(pageNumber);
@@ -49,7 +49,7 @@ function retrieveFirstTwentyMovies () {
     $('.user-movies').show();
   });
 }
-
+// calls popular movie endpoint from the Movie Database, community-driven results refreshed every 24 hours
 function retrieveMovies (pageNumber) {
   const params = {
     api_key: THE_MOVIE_DATABASE_KEY,
@@ -58,7 +58,7 @@ function retrieveMovies (pageNumber) {
   };
   $.getJSON(THE_MOVIE_DATABASE_ENDPOINT, params, pushMoviesToStorage).done(displayMovies);
 }
-
+// push new popular movie results to our storage
 function pushMoviesToStorage (response) {
   movies = response.results;
   movies.forEach(function(movie) {
@@ -66,7 +66,7 @@ function pushMoviesToStorage (response) {
   });
   console.log(popularMovies);
 }
-
+// display page of popular movie results
 function displayMovies () {
   const addMovieButton = `<button class="add-movie">Add to List</button>`;
 
@@ -91,7 +91,7 @@ function displayMovies () {
   });
   $('.movie-list').html(output);
 }
-
+// displays next set of popular movies on click of next button
 function displayNextMovies () {
   $('.next-button').on('click', function() {
     if (end >= popularMovies.length) {
@@ -106,7 +106,7 @@ function displayNextMovies () {
     }
   });
 }
-
+// displays prev set of popular movies on click of prev button
 function displayPrevMovies () { 
   $('.prev-button').on('click', function() {
     start -= resultsPerPage;
@@ -117,7 +117,7 @@ function displayPrevMovies () {
     }
   });
 }
-
+// add user-selected movie to user list
 function addMovieToUserList () {
   $('.movie-list').on('click', '.add-movie', function (event) {
   	let movieToAdd = popularMovies[$(this).closest('li').index() + start];
@@ -127,7 +127,7 @@ function addMovieToUserList () {
     displayUserList();
   });
 }
-
+// remove user-selected movie from list
 function removeMovieFromUserList () {
   $('.user-movies-list').on('click', '.remove-movie', function (event) {
     userMovies.splice($(this).closest('li').index(), 1);
@@ -135,7 +135,7 @@ function removeMovieFromUserList () {
     totalRunTimeForUserMovies();
   });
 }
-
+// display movies that user has added to their list
 function displayUserList () {
   const removeMovieButton = `<button class="remove-movie">Remove</button>`;
 
@@ -158,7 +158,7 @@ function displayUserList () {
   });
   $('.user-movies-list').html(output);
 }
-
+// find run time for individual movie that user has selected
 function findRunTimeForMovie (movie) {
 	const THE_MOVIE_DATABASE_DETAILS_ENDPOINT = 'https://api.themoviedb.org/3/movie/';
 	const movieID = movie.id;
@@ -172,7 +172,7 @@ function findRunTimeForMovie (movie) {
 		movie.runtime = response.runtime;
 	}).done(totalRunTimeForUserMovies);
 }
-
+// calculates total runtime for all user selected movies
 function totalRunTimeForUserMovies () {
   let totalRunTime = 0;
   let userMovieRunTimes = userMovies.forEach(function(movie) {
@@ -181,7 +181,7 @@ function totalRunTimeForUserMovies () {
   haveEnoughMovies(totalRunTime);
   $('.total-runtime').text(convertTotalRunTimeIntoHours(totalRunTime));
 }
-
+// tells user whether or not their movie run time meets or exceeds the duration of their trip
 function haveEnoughMovies (totalRunTime) {
   let tripTimeInMinutes = Math.round(tripTimeInSeconds / 60);
   if (totalRunTime >= tripTimeInMinutes && tripTimeInMinutes > 0) {
@@ -190,7 +190,7 @@ function haveEnoughMovies (totalRunTime) {
   	$('.enough-movies-toggle').hide();
   }
 }
-
+// displays runtime in a more readable format for users
 function convertTotalRunTimeIntoHours (totalRunTime) {
   let hours = 0;
   if (totalRunTime >= 60) {
@@ -202,7 +202,7 @@ function convertTotalRunTimeIntoHours (totalRunTime) {
   let minutes = totalRunTime;
   return `${hours} hours ${minutes} mins`;
 }
-
+//limits movie descriptions to fit within poster overlay
 function limitDescriptionLength (description) {
 	if (description.length > 260) {
 		return description.substring(0, 261) + '...';
