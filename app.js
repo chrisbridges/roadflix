@@ -29,7 +29,7 @@ function getDistance() {
 		});
 	});
 }
-
+// wrap these in an object - state management
 const THE_MOVIE_DATABASE_ENDPOINT = 'https://api.themoviedb.org/3/movie/popular'; // popular movies endpoint
 const THE_MOVIE_DATABASE_KEY = 'f852305411e85c5520c80f92853fd711';
 const THE_MOVIE_DATABASE_IMAGE_BASEURL = 'https://image.tmdb.org/t/p'; // endpoint for movie posters
@@ -209,11 +209,13 @@ function limitDescriptionLength (description) {
 	}
 	return description;
 }
-
-$(getDistance);
-$(retrieveFirstTwentyMovies);
-$(displayNextMovies);
-$(displayPrevMovies);
-$(addMovieToUserList);
-$(removeMovieFromUserList);
+// wrap all in one function
+$(document).ready(function () {
+  getDistance();
+  retrieveFirstTwentyMovies();
+  displayNextMovies();
+  displayPrevMovies();
+  addMovieToUserList();
+  removeMovieFromUserList();
+});
 
