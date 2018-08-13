@@ -32,7 +32,7 @@ h2 {
 }
 
 #trip-form {
-  padding-top: 20px;
+  padding-top: 15px;
 }
 
 #trip-form, .trip, .user-movies {
@@ -43,6 +43,7 @@ legend {
   margin-bottom: 15px;
   font-size: 20px;
   font-weight: bold;
+  margin: 0 34.6%;
 }
 
 label {
