@@ -64,7 +64,6 @@ function pushMoviesToStorage (response) {
   movies.forEach(function(movie) {
     popularMovies.push(movie);
   });
-  console.log(popularMovies);
 }
 // display page of popular movie results
 function displayMovies () {
